@@ -9,4 +9,9 @@ RUN phpcs --config-set severity 1
 RUN phpcs --config-set colors 1
 RUN phpcs --config-set default_standard Drupal
 
+RUN php -r "copy('https://phar.phpunit.de/phpunit.phar', 'phpunit.phar');" \
+	&& chmod +x phpunit.phar \
+	&& mv phpunit.phar /usr/local/bin/phpunit \
+	&& phpunit --version
+
 WORKDIR /var/www/html
